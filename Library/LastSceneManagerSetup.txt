@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/WireTest.unity
+- path: Assets/nakata.unity
   isLoaded: 1
   isActive: 1

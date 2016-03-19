@@ -70,9 +70,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Assets\Scripts\ObjectPool.cs" />
+    <Compile Include="Assets\Assets\Scripts\WireAction.cs" />
     <Compile Include="Assets\Assets\Scripts\WireLauncher.cs" />
     <Compile Include="Assets\Assets\Scripts\WirePod.cs" />
-    <Compile Include="Assets\WireAction.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Standard Assets\Characters\FirstPersonCharacter\FirstPersonCharacterGuidelines.txt" />
