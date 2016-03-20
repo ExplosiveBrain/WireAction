@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/nakata.unity
+- path: Assets/tackykey.unity
   isLoaded: 1
   isActive: 1

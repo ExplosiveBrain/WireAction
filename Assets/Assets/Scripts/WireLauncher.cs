@@ -7,6 +7,8 @@ public class WireLauncher : MonoBehaviour {
     private RaycastHit hit;
 
     private GameObject pod;
+    public bool trigger1 = false;
+    public bool trigger2 = false;
 
     public float limit;
     private GameObject[] podsleft;
@@ -19,14 +21,17 @@ public class WireLauncher : MonoBehaviour {
     public float Speed = 20f;
     private Vector3 direction;
 
+    //PlayerのJump力
+    public float JumpSpeed = 10f;
+
     //PlayerがPodに接近できる距離
-    public float Range = 2.5f;
+    public float Range = 2.0f;
 
     //射撃可能な対象物の最小距離
-    public float minShotRange = 3;
+    public float minShotRange = 1f;
 
     //Podの射出力
-    private float ShotPower = 2000f;
+    public float ShotPower = 2000f;
 
     private GameObject Player;
     private Rigidbody PlayerRig;
@@ -39,6 +44,7 @@ public class WireLauncher : MonoBehaviour {
         }
     }
 
+    
 
 
 	// Use this for initialization
@@ -50,7 +56,7 @@ public class WireLauncher : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (!trigger1 && Input.GetButtonDown("Fire1"))
         {
             //対象が近すぎる場合は射出不能
             if (!Physics.Raycast(transform.position, -transform.forward, out hit, minShotRange))
@@ -60,7 +66,7 @@ public class WireLauncher : MonoBehaviour {
         }
 
         if (pod != null)
-        { 
+        {
             //壁に付着できた場合は他のPodをはずす
             if (pod.GetComponent<WirePod>().IsTarget == true)
             {
@@ -71,10 +77,40 @@ public class WireLauncher : MonoBehaviour {
                 }
 
                 pod.GetComponent<WirePod>().IsActive = true;
+                if (trigger1 == false)
+                {
+                    trigger1 = true;
+                }
             }
+        }
 
+        if (trigger1 && Input.GetButtonDown("Fire1"))
+        {
+            trigger2 = true;
+        }
+
+        if (pod.GetComponent<WirePod>().IsActive && Input.GetButtonDown("Jump"))
+        {
+            direction = pod.transform.position - Player.transform.position;
+            DetachPod(pod);
+            PlayerRig.isKinematic = false;
+            pod.GetComponent<WirePod>().IsTarget = false;
+            pod.GetComponent<WirePod>().IsActive = false;
+            trigger1 = false;
+            if (trigger2)
+            {
+                Player.GetComponent<Rigidbody>().velocity = JumpSpeed * (direction.normalized + Vector3.up * 0.3f);
+            }
+            else
+            {
+                Player.GetComponent<Rigidbody>().velocity = JumpSpeed * Vector3.up * 0.3f;
+            }
+            
+        }
+
+        if (trigger2)
+        {            
             MoveToPod();
-
         }
     }
 
@@ -99,12 +135,18 @@ public class WireLauncher : MonoBehaviour {
     void MoveToPod()
     {
         if (pod.GetComponent<WirePod>().IsActive == true)
-        {
+        {            
             direction = pod.transform.position - Player.transform.position;
             PlayerRig.isKinematic = true;
-            if (direction.sqrMagnitude > Range)
+            if (direction.sqrMagnitude > Range * Range)
             {
                 Player.transform.position += direction.normalized * Speed;
+            }
+            else
+            {
+                pod.GetComponent<WirePod>().IsTarget = false;
+                trigger1 = false;
+                trigger2 = false;
             }
         }
         else
