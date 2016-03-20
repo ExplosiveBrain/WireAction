@@ -84,47 +84,47 @@ public class WireLauncher : MonoBehaviour {
                     trigger1 = true;
                 }
             }
-        }
+            //pod付着時にクリックしたらtrigger2をtrueにしてMoveToPodをループ状態に
+            if (trigger1 && Input.GetButtonDown("Fire1"))
+            {
+                trigger2 = true;
+            }
 
-        //pod付着時にクリックしたらtrigger2をtrueにしてMoveToPodをループ状態に
-        if (trigger1 && Input.GetButtonDown("Fire1"))
-        {
-            trigger2 = true;
-        }
+            //podが壁に張り付いてる状態でspaceを押すと･･･
+            if (pod.GetComponent<WirePod>().IsActive && Input.GetButtonDown("Jump"))
+            {
+                direction = pod.transform.position - Player.transform.position;
 
-        //podが壁に張り付いてる状態でspaceを押すと･･･
-        if (pod.GetComponent<WirePod>().IsActive && Input.GetButtonDown("Jump"))
-        {
-            direction = pod.transform.position - Player.transform.position;
+                //podがはがれた後
+                DetachPod(pod);
+                PlayerRig.isKinematic = false;
+                pod.GetComponent<WirePod>().IsTarget = false;
+                pod.GetComponent<WirePod>().IsActive = false;
+                trigger1 = false;
 
-            //podがはがれた後
-            DetachPod(pod);
-            PlayerRig.isKinematic = false;
-            pod.GetComponent<WirePod>().IsTarget = false;
-            pod.GetComponent<WirePod>().IsActive = false;
-            trigger1 = false;
+                //飛んでるときはその方向にブーン
+                if (trigger2)
+                {
+                    Player.GetComponent<Rigidbody>().velocity = JumpSpeed * (direction.normalized + Vector3.up * 0.3f);
+                }
 
-            //飛んでるときはその方向にブーン
+                //飛ぶ前とかplayerが壁に張り付いた状態のときはその場でジャンプ
+                else
+                {
+                    Player.GetComponent<Rigidbody>().velocity = JumpSpeed * Vector3.up * 0.3f;
+                }
+
+
+
+            }
+
+            //MoveToPodがフレームごとに呼ばれてるみたいだから、よくわからんのでこうなった。
             if (trigger2)
             {
-                Player.GetComponent<Rigidbody>().velocity = JumpSpeed * (direction.normalized + Vector3.up * 0.3f);
+                MoveToPod();
             }
-
-            //飛ぶ前とかplayerが壁に張り付いた状態のときはその場でジャンプ
-            else
-            {
-                Player.GetComponent<Rigidbody>().velocity = JumpSpeed * Vector3.up * 0.3f;
-            }
-
-            
-            
         }
-
-        //MoveToPodがフレームごとに呼ばれてるみたいだから、よくわからんのでこうなった。
-        if (trigger2)
-        {            
-            MoveToPod();
-        }
+        
     }
 
     void LaunchPod()
