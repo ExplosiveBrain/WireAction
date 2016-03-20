@@ -7,6 +7,8 @@ public class WireLauncher : MonoBehaviour {
     private RaycastHit hit;
 
     private GameObject pod;
+
+    //trigger1はポッド付着状態を、trigger2は移動状態かどうか
     public bool trigger1 = false;
     public bool trigger2 = false;
 
@@ -84,30 +86,41 @@ public class WireLauncher : MonoBehaviour {
             }
         }
 
+        //pod付着時にクリックしたらtrigger2をtrueにしてMoveToPodをループ状態に
         if (trigger1 && Input.GetButtonDown("Fire1"))
         {
             trigger2 = true;
         }
 
+        //podが壁に張り付いてる状態でspaceを押すと･･･
         if (pod.GetComponent<WirePod>().IsActive && Input.GetButtonDown("Jump"))
         {
             direction = pod.transform.position - Player.transform.position;
+
+            //podがはがれた後
             DetachPod(pod);
             PlayerRig.isKinematic = false;
             pod.GetComponent<WirePod>().IsTarget = false;
             pod.GetComponent<WirePod>().IsActive = false;
             trigger1 = false;
+
+            //飛んでるときはその方向にブーン
             if (trigger2)
             {
                 Player.GetComponent<Rigidbody>().velocity = JumpSpeed * (direction.normalized + Vector3.up * 0.3f);
             }
+
+            //飛ぶ前とかplayerが壁に張り付いた状態のときはその場でジャンプ
             else
             {
                 Player.GetComponent<Rigidbody>().velocity = JumpSpeed * Vector3.up * 0.3f;
             }
+
+            
             
         }
 
+        //MoveToPodがフレームごとに呼ばれてるみたいだから、よくわからんのでこうなった。
         if (trigger2)
         {            
             MoveToPod();
@@ -142,6 +155,8 @@ public class WireLauncher : MonoBehaviour {
             {
                 Player.transform.position += direction.normalized * Speed;
             }
+
+            //壁に到着次第trigger関係はリセット
             else
             {
                 pod.GetComponent<WirePod>().IsTarget = false;
