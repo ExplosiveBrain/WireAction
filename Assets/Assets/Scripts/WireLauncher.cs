@@ -9,8 +9,12 @@ public class WireLauncher : MonoBehaviour {
     private GameObject pod;
 
     //trigger1はポッド付着状態を、trigger2は移動状態かどうか
-    public bool trigger1 = false;
-    public bool trigger2 = false;
+    private bool trigger1 = false;
+    private bool trigger2 = false;
+    
+    //鬼畜スイッチ
+    public bool 鬼畜スイッチ = false;
+    private bool trigger3 = true;
 
     public float limit;
     private GameObject[] podsleft;
@@ -24,7 +28,7 @@ public class WireLauncher : MonoBehaviour {
     private Vector3 direction;
 
     //PlayerのJump力
-    public float JumpSpeed = 10f;
+    public float JumpSpeed = 15f;
 
     //PlayerがPodに接近できる距離
     public float Range = 2.0f;
@@ -62,8 +66,8 @@ public class WireLauncher : MonoBehaviour {
         {
             //対象が近すぎる場合は射出不能
             if (!Physics.Raycast(transform.position, -transform.forward, out hit, minShotRange))
-            {
-                LaunchPod();
+            {                
+                LaunchPod();                
             }
         }
 
@@ -77,8 +81,8 @@ public class WireLauncher : MonoBehaviour {
                 {
                     if (podleft != pod) DetachPod(podleft);
                 }
-
                 pod.GetComponent<WirePod>().IsActive = true;
+
                 if (trigger1 == false)
                 {
                     trigger1 = true;
@@ -98,8 +102,6 @@ public class WireLauncher : MonoBehaviour {
                 //podがはがれた後
                 DetachPod(pod);
                 PlayerRig.isKinematic = false;
-                pod.GetComponent<WirePod>().IsTarget = false;
-                pod.GetComponent<WirePod>().IsActive = false;
                 trigger1 = false;
 
                 //飛んでるときはその方向にブーン
@@ -117,12 +119,20 @@ public class WireLauncher : MonoBehaviour {
 
 
             }
-
             //MoveToPodがフレームごとに呼ばれてるみたいだから、よくわからんのでこうなった。
             if (trigger2)
             {
                 MoveToPod();
             }
+
+            if (trigger3)
+            {
+                trigger3 = false;
+                DetachPod(pod);
+                PlayerRig.isKinematic = false;
+            }
+            
+            
         }
         
     }
@@ -131,7 +141,12 @@ public class WireLauncher : MonoBehaviour {
     {
         offset = transform.forward * -Offset;
         pod = ObjectPool.instance.GetGameObject(PrefabPod, transform.position + offset, transform.rotation);
-        pod.GetComponent<Rigidbody>().AddForce(-transform.forward * ShotPower);  
+        pod.GetComponent<Rigidbody>().AddForce(-transform.forward * ShotPower);
+
+        if (鬼畜スイッチ)
+        {
+            trigger3 = true;
+        }
     }
 
     //壁についたPodの取り外し
@@ -161,7 +176,7 @@ public class WireLauncher : MonoBehaviour {
             {
                 pod.GetComponent<WirePod>().IsTarget = false;
                 trigger1 = false;
-                trigger2 = false;
+                trigger2 = false;            
             }
         }
         else

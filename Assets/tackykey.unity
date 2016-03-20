@@ -194,7 +194,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11470782, guid: c6453f8e1f814744d8b94e5a6d1f9942, type: 2}
       propertyPath: JumpSpeed
-      value: 10
+      value: 15.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 11470782, guid: c6453f8e1f814744d8b94e5a6d1f9942, type: 2}
+      propertyPath: "\u9B3C\u755C\u30B9\u30A4\u30C3\u30C1"
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c6453f8e1f814744d8b94e5a6d1f9942, type: 2}
