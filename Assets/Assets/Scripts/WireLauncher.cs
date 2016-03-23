@@ -167,7 +167,7 @@ public class WireLauncher : MonoBehaviour {
             PlayerRig.isKinematic = true;
             if (direction.sqrMagnitude > Range * Range)
             {
-                Player.transform.position += direction.normalized * Speed;
+                Player.transform.position += direction.normalized * Speed * Time.deltaTime;
             }
 
             //壁に到着次第trigger関係はリセット

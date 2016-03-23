@@ -7,8 +7,6 @@ public class WirePod : MonoBehaviour {
     public float lifetime = 5f;
     private float time;
 
-    public float PushForce = 200f;
-
     private bool istarget = false;
     private bool isactive = false;
 
