@@ -4,6 +4,9 @@ using System.Collections;
 public class WireLauncher : MonoBehaviour {
     public LayerMask mask;
     public GameObject PrefabPod;
+
+    public GameObject Muzzle;
+
     private RaycastHit hit;
 
     private GameObject pod;
@@ -18,10 +21,6 @@ public class WireLauncher : MonoBehaviour {
 
     public float limit;
     private GameObject[] podsleft;
-
-    //射出位置調整
-    public float Offset = 1f;
-    private Vector3 offset;
 
     //Playerのプッシュ力
     public float Speed = 20f;
@@ -139,8 +138,8 @@ public class WireLauncher : MonoBehaviour {
 
     void LaunchPod()
     {
-        offset = transform.forward * -Offset;
-        pod = ObjectPool.instance.GetGameObject(PrefabPod, transform.position + offset, transform.rotation);
+        pod = ObjectPool.instance.GetGameObject(PrefabPod, Muzzle.transform.position, transform.rotation);
+        //GameObjectの青→と反対方向に射出
         pod.GetComponent<Rigidbody>().AddForce(-transform.forward * ShotPower);
 
         if (鬼畜スイッチ)
