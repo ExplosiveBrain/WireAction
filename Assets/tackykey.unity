@@ -196,11 +196,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11470782, guid: c6453f8e1f814744d8b94e5a6d1f9942, type: 2}
       propertyPath: Speed
-      value: 1
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 11470782, guid: c6453f8e1f814744d8b94e5a6d1f9942, type: 2}
       propertyPath: Range
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 498784, guid: c6453f8e1f814744d8b94e5a6d1f9942, type: 2}
       propertyPath: m_LocalScale.x
@@ -228,7 +228,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11470782, guid: c6453f8e1f814744d8b94e5a6d1f9942, type: 2}
       propertyPath: minShotRange
-      value: 3.3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11400004, guid: c6453f8e1f814744d8b94e5a6d1f9942, type: 2}
       propertyPath: mouseLook.MaximumX
@@ -248,7 +248,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11470782, guid: c6453f8e1f814744d8b94e5a6d1f9942, type: 2}
       propertyPath: JumpSpeed
-      value: 15.01
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 11470782, guid: c6453f8e1f814744d8b94e5a6d1f9942, type: 2}
       propertyPath: "\u9B3C\u755C\u30B9\u30A4\u30C3\u30C1"
@@ -265,6 +265,10 @@ Prefab:
     - target: {fileID: 2000000, guid: c6453f8e1f814744d8b94e5a6d1f9942, type: 2}
       propertyPath: field of view
       value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 11470782, guid: c6453f8e1f814744d8b94e5a6d1f9942, type: 2}
+      propertyPath: ShotPower
+      value: 2000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c6453f8e1f814744d8b94e5a6d1f9942, type: 2}
@@ -757,3 +761,46 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
+--- !u!1 &2106780490 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 141186, guid: c6453f8e1f814744d8b94e5a6d1f9942, type: 2}
+  m_PrefabInternal: {fileID: 194144404}
+--- !u!120 &2106780491
+LineRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2106780490}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_Materials:
+  - {fileID: 2100000, guid: aadd58f12d22ed64681cd74e689b3c63, type: 2}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 1
+  m_ReflectionProbeUsage: 1
+  m_ProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_Positions:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 1}
+  m_Parameters:
+    startWidth: 1
+    endWidth: 1
+    m_StartColor:
+      serializedVersion: 2
+      rgba: 4294967295
+    m_EndColor:
+      serializedVersion: 2
+      rgba: 4294967295
+  m_UseWorldSpace: 1

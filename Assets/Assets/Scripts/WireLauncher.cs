@@ -22,6 +22,8 @@ public class WireLauncher : MonoBehaviour {
     public float limit;
     private GameObject[] podsleft;
 
+    private LineRenderer laser2;
+
     //Playerのプッシュ力
     public float Speed = 20f;
     private Vector3 direction;
@@ -55,8 +57,9 @@ public class WireLauncher : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         Player = GameObject.FindGameObjectWithTag("Player");
-        PlayerRig = Player.GetComponent<Rigidbody>();        
-	}
+        PlayerRig = Player.GetComponent<Rigidbody>();
+        laser2 = gameObject.GetComponent<LineRenderer>();
+    }
 
     // Update is called once per frame
     void Update()
@@ -86,6 +89,12 @@ public class WireLauncher : MonoBehaviour {
                 {
                     trigger1 = true;
                 }
+
+                if (!laser2.enabled)
+                {
+                    laser2.enabled = true;
+                }
+                
             }
             //pod付着時にクリックしたらtrigger2をtrueにしてMoveToPodをループ状態に
             if (trigger1 && Input.GetButtonDown("Fire1"))
@@ -130,10 +139,17 @@ public class WireLauncher : MonoBehaviour {
                 DetachPod(pod);
                 PlayerRig.isKinematic = false;
             }
-            
-            
+
+            if (laser2.enabled)
+            {
+                laser2.SetPosition(1, Player.transform.position + (Player.transform.position - pod.transform.position).normalized * 5f);
+                laser2.SetPosition(0, pod.transform.position);                
+            }
+
         }
+
         
+
     }
 
     void LaunchPod()
@@ -141,6 +157,9 @@ public class WireLauncher : MonoBehaviour {
         pod = ObjectPool.instance.GetGameObject(PrefabPod, Muzzle.transform.position, transform.rotation);
         //GameObjectの青→と反対方向に射出
         pod.GetComponent<Rigidbody>().AddForce(-transform.forward * ShotPower);
+        laser2.enabled = false;
+
+        pod.GetComponent<LineRenderer>().enabled = true;
 
         if (鬼畜スイッチ)
         {
@@ -154,15 +173,18 @@ public class WireLauncher : MonoBehaviour {
         if (pod.GetComponent<FixedJoint>() != null)
         {
             Destroy(pod.GetComponent<FixedJoint>());
+            pod.GetComponent<WirePod>().IsTarget = false;
+            pod.GetComponent<WirePod>().IsActive = false;
+            laser2.enabled = false;
+            
         }
-        pod.GetComponent<WirePod>().IsTarget = false;
-        pod.GetComponent<WirePod>().IsActive = false;
+        
     }
 
     void MoveToPod()
     {
         if (pod.GetComponent<WirePod>().IsActive == true)
-        {            
+        {
             direction = pod.transform.position - Player.transform.position;
             PlayerRig.isKinematic = true;
             if (direction.sqrMagnitude > Range * Range)

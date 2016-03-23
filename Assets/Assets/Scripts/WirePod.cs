@@ -11,8 +11,10 @@ public class WirePod : MonoBehaviour {
     private bool isactive = false;
 
     Vector3 vector;
-    public GameObject Player;
+    private GameObject Player;
     private Rigidbody PlayerRig;
+    private LineRenderer lineRenderer;
+
 
     //壁に着いてるか判定
     public bool IsTarget
@@ -43,8 +45,10 @@ public class WirePod : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        Player = GameObject.FindGameObjectWithTag("Player");
         time = lifetime;
-	}
+        lineRenderer = gameObject.GetComponent<LineRenderer>();
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -68,6 +72,12 @@ public class WirePod : MonoBehaviour {
             istarget = false;
             isactive = false;
         }
+
+        if (lineRenderer.enabled)
+        {
+            lineRenderer.SetPosition(0, gameObject.transform.position);
+            lineRenderer.SetPosition(1, Player.transform.position + (Player.transform.position - gameObject.transform.position).normalized * 3f);
+        }
 	}
     
     void OnCollisionEnter(Collision collision)
@@ -81,7 +91,8 @@ public class WirePod : MonoBehaviour {
                 fixedjoint = gameObject.AddComponent<FixedJoint>();
                 fixedjoint.connectedBody = collision.gameObject.GetComponent<Rigidbody>();
             }
-            istarget = true;
+            istarget = true;            
+            lineRenderer.enabled = false;
         }
     }
 }
