@@ -65,6 +65,7 @@ GameObject:
   - 23: {fileID: 2324018}
   - 114: {fileID: 11470782}
   - 114: {fileID: 11408324}
+  - 120: {fileID: 12041108}
   m_Layer: 10
   m_Name: WireLauncher
   m_TagString: Untagged
@@ -176,7 +177,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 141186}
   m_LocalRotation: {x: 0, y: -1, z: 0, w: -0.00000016292068}
-  m_LocalPosition: {x: 0.288, y: -0.121, z: 1}
+  m_LocalPosition: {x: 0.347, y: -0.12, z: 0.532}
   m_LocalScale: {x: 0.1, y: 0.1, z: 1}
   m_Children:
   - {fileID: 469070}
@@ -470,7 +471,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd84ab0be7d056e4fbc8496ad5928e9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FPScon_R: {fileID: 0}
   AimingPosition: 1
   SmoothTime: 0.03
   zoomspeed: 300
@@ -507,10 +507,49 @@ MonoBehaviour:
   "\u9B3C\u755C\u30B9\u30A4\u30C3\u30C1": 1
   limit: 0
   Speed: 20
-  JumpSpeed: 15.01
-  Range: 3
-  minShotRange: 3.3
-  ShotPower: 20000
+  JumpSpeed: 15
+  Range: 2
+  minShotRange: 1
+  ShotPower: 2000
+--- !u!120 &12041108
+LineRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 141186}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_Materials:
+  - {fileID: 2100000, guid: aadd58f12d22ed64681cd74e689b3c63, type: 2}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 1
+  m_ReflectionProbeUsage: 1
+  m_ProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_Positions:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 1}
+  m_Parameters:
+    startWidth: 1
+    endWidth: 1
+    m_StartColor:
+      serializedVersion: 2
+      rgba: 4294967295
+    m_EndColor:
+      serializedVersion: 2
+      rgba: 4294967295
+  m_UseWorldSpace: 1
 --- !u!136 &13600000
 CapsuleCollider:
   m_ObjectHideFlags: 1

@@ -13,8 +13,10 @@ public class WirePod : MonoBehaviour {
     Vector3 vector;
     private GameObject Player;
     private Rigidbody PlayerRig;
-    private LineRenderer lineRenderer;
+    //private LineRenderer lineRenderer;
 
+
+    private GameObject ParticleSystem;
 
     //壁に着いてるか判定
     public bool IsTarget
@@ -47,7 +49,8 @@ public class WirePod : MonoBehaviour {
 	void Start () {
         Player = GameObject.FindGameObjectWithTag("Player");
         time = lifetime;
-        lineRenderer = gameObject.GetComponent<LineRenderer>();
+        ParticleSystem = transform.FindChild("Particle System").gameObject;
+        //lineRenderer = gameObject.GetComponent<LineRenderer>();
     }
 	
 	// Update is called once per frame
@@ -56,7 +59,7 @@ public class WirePod : MonoBehaviour {
         {
             time = lifetime;
         }
-        else
+        else if(!istarget && !isactive)
         {
            //壁に当たらなかったら一定時間後に死ぬ
             time -= Time.deltaTime;
@@ -71,13 +74,24 @@ public class WirePod : MonoBehaviour {
             ObjectPool.instance.ReleaseGameObject(gameObject);
             istarget = false;
             isactive = false;
+            ParticleSystem.SetActive(false);
         }
 
+        if(isactive && !ParticleSystem.activeSelf)
+        {
+            ParticleSystem.SetActive(true);
+        } else if(!isactive && ParticleSystem.activeSelf)
+        {
+            ParticleSystem.SetActive(false);
+        }
+
+        /*
         if (lineRenderer.enabled)
         {
             lineRenderer.SetPosition(0, gameObject.transform.position);
             lineRenderer.SetPosition(1, Player.transform.position + (Player.transform.position - gameObject.transform.position).normalized * 3f);
         }
+        */
 	}
     
     void OnCollisionEnter(Collision collision)
@@ -92,7 +106,7 @@ public class WirePod : MonoBehaviour {
                 fixedjoint.connectedBody = collision.gameObject.GetComponent<Rigidbody>();
             }
             istarget = true;            
-            lineRenderer.enabled = false;
+            //lineRenderer.enabled = false;
         }
     }
 }

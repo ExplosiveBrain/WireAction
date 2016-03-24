@@ -10,6 +10,7 @@ public class WireLauncher : MonoBehaviour {
     private RaycastHit hit;
 
     private GameObject pod;
+    private GameObject particleEmitter;
 
     //trigger1はポッド付着状態を、trigger2は移動状態かどうか
     private bool trigger1 = false;
@@ -22,9 +23,9 @@ public class WireLauncher : MonoBehaviour {
     public float limit;
     private GameObject[] podsleft;
 
-    private LineRenderer laser2;
+    //private LineRenderer laser2;
 
-    //Playerのプッシュ力
+    //Pazayerのプッシュ力
     public float Speed = 20f;
     private Vector3 direction;
 
@@ -58,7 +59,7 @@ public class WireLauncher : MonoBehaviour {
 	void Start () {
         Player = GameObject.FindGameObjectWithTag("Player");
         PlayerRig = Player.GetComponent<Rigidbody>();
-        laser2 = gameObject.GetComponent<LineRenderer>();
+        //laser2 = gameObject.GetComponent<LineRenderer>();
     }
 
     // Update is called once per frame
@@ -89,12 +90,12 @@ public class WireLauncher : MonoBehaviour {
                 {
                     trigger1 = true;
                 }
-
+                /*
                 if (!laser2.enabled)
                 {
                     laser2.enabled = true;
                 }
-                
+                */
             }
             //pod付着時にクリックしたらtrigger2をtrueにしてMoveToPodをループ状態に
             if (trigger1 && Input.GetButtonDown("Fire1"))
@@ -139,13 +140,13 @@ public class WireLauncher : MonoBehaviour {
                 DetachPod(pod);
                 PlayerRig.isKinematic = false;
             }
-
+            /*
             if (laser2.enabled)
             {
                 laser2.SetPosition(1, Player.transform.position + (Player.transform.position - pod.transform.position).normalized * 5f);
                 laser2.SetPosition(0, pod.transform.position);                
             }
-
+            */
         }
 
         
@@ -157,9 +158,9 @@ public class WireLauncher : MonoBehaviour {
         pod = ObjectPool.instance.GetGameObject(PrefabPod, Muzzle.transform.position, transform.rotation);
         //GameObjectの青→と反対方向に射出
         pod.GetComponent<Rigidbody>().AddForce(-transform.forward * ShotPower);
-        laser2.enabled = false;
+        //laser2.enabled = false;
 
-        pod.GetComponent<LineRenderer>().enabled = true;
+        //pod.GetComponent<LineRenderer>().enabled = true;
 
         if (鬼畜スイッチ)
         {
@@ -175,7 +176,7 @@ public class WireLauncher : MonoBehaviour {
             Destroy(pod.GetComponent<FixedJoint>());
             pod.GetComponent<WirePod>().IsTarget = false;
             pod.GetComponent<WirePod>().IsActive = false;
-            laser2.enabled = false;
+            //laser2.enabled = false;
             
         }
         

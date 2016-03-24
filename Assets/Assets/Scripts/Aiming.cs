@@ -10,7 +10,7 @@ public class Aiming : MonoBehaviour {
     private Vector3 AimingLocalPosition;
 
     /*Player Script*/
-    public RigidbodyFirstPersonController FPScon_R;
+    private RigidbodyFirstPersonController FPScon_R;
 
     /*Camera Component*/
     private Camera Camera;
