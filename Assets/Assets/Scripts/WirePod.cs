@@ -14,6 +14,7 @@ public class WirePod : MonoBehaviour {
     private GameObject Player;
     private Rigidbody PlayerRig;
     //private LineRenderer lineRenderer;
+    private ParticleSystem particle;
 
 
     private GameObject ParticleSystem;
@@ -51,6 +52,7 @@ public class WirePod : MonoBehaviour {
         time = lifetime;
         ParticleSystem = transform.FindChild("Particle System").gameObject;
         //lineRenderer = gameObject.GetComponent<LineRenderer>();
+        particle = gameObject.GetComponentInChildren<ParticleSystem>();
     }
 	
 	// Update is called once per frame
@@ -92,8 +94,12 @@ public class WirePod : MonoBehaviour {
             lineRenderer.SetPosition(1, Player.transform.position + (Player.transform.position - gameObject.transform.position).normalized * 3f);
         }
         */
-	}
-    
+        
+        
+        
+        
+    }
+
     void OnCollisionEnter(Collision collision)
     {
         //TagがWallの物体にのみ粘着
@@ -104,9 +110,13 @@ public class WirePod : MonoBehaviour {
             {
                 fixedjoint = gameObject.AddComponent<FixedJoint>();
                 fixedjoint.connectedBody = collision.gameObject.GetComponent<Rigidbody>();
+
+                particle.Play();
             }
-            istarget = true;            
+            istarget = true;
             //lineRenderer.enabled = false;
+            
+            
         }
     }
 }

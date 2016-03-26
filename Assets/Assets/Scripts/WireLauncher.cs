@@ -13,12 +13,12 @@ public class WireLauncher : MonoBehaviour {
     private GameObject particleEmitter;
 
     //trigger1はポッド付着状態を、trigger2は移動状態かどうか
-    private bool trigger1 = false;
-    private bool trigger2 = false;
+    public bool trigger1 = false;
+    public bool trigger2 = false;
     
     //鬼畜スイッチ
     public bool 鬼畜スイッチ = false;
-    private bool trigger3 = true;
+    public bool trigger3 = true;
 
     public float limit;
     private GameObject[] podsleft;
@@ -177,7 +177,9 @@ public class WireLauncher : MonoBehaviour {
             pod.GetComponent<WirePod>().IsTarget = false;
             pod.GetComponent<WirePod>().IsActive = false;
             //laser2.enabled = false;
-            
+            pod.GetComponentInChildren<ParticleSystem>().Clear();
+            pod.GetComponentInChildren<ParticleSystem>().Stop();
+
         }
         
     }
@@ -198,7 +200,9 @@ public class WireLauncher : MonoBehaviour {
             {
                 pod.GetComponent<WirePod>().IsTarget = false;
                 trigger1 = false;
-                trigger2 = false;            
+                trigger2 = false;
+                pod.GetComponentInChildren<ParticleSystem>().Clear();
+                pod.GetComponentInChildren<ParticleSystem>().Stop();
             }
         }
         else
