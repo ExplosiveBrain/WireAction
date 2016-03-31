@@ -202,8 +202,8 @@ public class WireLauncher : MonoBehaviour {
                 pod.GetComponent<WirePod>().IsTarget = false;
                 trigger1 = false;
                 trigger2 = false;
-                //pod.GetComponentInChildren<ParticleSystem>().Clear();
-                //pod.GetComponentInChildren<ParticleSystem>().Stop();
+                pod.GetComponentInChildren<ParticleSystem>().Clear();
+                pod.GetComponentInChildren<ParticleSystem>().Stop();
             }
         }
         else
