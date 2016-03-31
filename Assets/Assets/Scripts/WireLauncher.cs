@@ -10,7 +10,6 @@ public class WireLauncher : MonoBehaviour {
     private RaycastHit hit;
 
     private GameObject pod;
-    private GameObject particleEmitter;
 
     //trigger1はポッド付着状態を、trigger2は移動状態かどうか
     public bool trigger1 = false;
@@ -156,6 +155,8 @@ public class WireLauncher : MonoBehaviour {
     void LaunchPod()
     {
         pod = ObjectPool.instance.GetGameObject(PrefabPod, Muzzle.transform.position, transform.rotation);
+        pod.GetComponentInChildren<ParticleSystem>().Clear();
+        pod.GetComponentInChildren<ParticleSystem>().Stop();
         //GameObjectの青→と反対方向に射出
         pod.GetComponent<Rigidbody>().AddForce(-transform.forward * ShotPower);
         //laser2.enabled = false;
@@ -177,7 +178,7 @@ public class WireLauncher : MonoBehaviour {
             pod.GetComponent<WirePod>().IsTarget = false;
             pod.GetComponent<WirePod>().IsActive = false;
             //laser2.enabled = false;
-            //pod.GetComponentInChildren<ParticleSystem>().Clear();
+            pod.GetComponentInChildren<ParticleSystem>().Clear();
             pod.GetComponentInChildren<ParticleSystem>().Stop();
 
         }
@@ -201,8 +202,8 @@ public class WireLauncher : MonoBehaviour {
                 pod.GetComponent<WirePod>().IsTarget = false;
                 trigger1 = false;
                 trigger2 = false;
-                pod.GetComponentInChildren<ParticleSystem>().Clear();
-                pod.GetComponentInChildren<ParticleSystem>().Stop();
+                //pod.GetComponentInChildren<ParticleSystem>().Clear();
+                //pod.GetComponentInChildren<ParticleSystem>().Stop();
             }
         }
         else

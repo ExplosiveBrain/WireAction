@@ -74,29 +74,33 @@ public class WirePod : MonoBehaviour {
             time = lifetime;
             gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
             gameObject.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+            particle.Clear();
+            particle.Stop();
             ObjectPool.instance.ReleaseGameObject(gameObject);
             istarget = false;
             isactive = false;
-            particle.Clear();
-            particle.Stop();
+            
         }
 
+
+        /*
         if(isactive && !particle.IsAlive())
         {
             particle.Play();
-        } else if(!isactive && particle.IsAlive())
+        }
+        else if(!isactive && particle.IsAlive())
         {
             particle.Clear();
             particle.Stop();
         }
 
-        /*
+        
         if (lineRenderer.enabled)
         {
             lineRenderer.SetPosition(0, gameObject.transform.position);
             lineRenderer.SetPosition(1, Player.transform.position + (Player.transform.position - gameObject.transform.position).normalized * 3f);
         }
-        */        
+        */
     }
 
     void OnCollisionEnter(Collision collision)
