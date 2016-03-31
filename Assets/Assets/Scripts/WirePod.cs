@@ -53,6 +53,7 @@ public class WirePod : MonoBehaviour {
         ParticleSystem = transform.FindChild("Particle System").gameObject;
         //lineRenderer = gameObject.GetComponent<LineRenderer>();
         particle = gameObject.GetComponentInChildren<ParticleSystem>();
+        particle.Stop();
     }
 	
 	// Update is called once per frame
@@ -76,15 +77,17 @@ public class WirePod : MonoBehaviour {
             ObjectPool.instance.ReleaseGameObject(gameObject);
             istarget = false;
             isactive = false;
-            ParticleSystem.SetActive(false);
+            particle.Clear();
+            particle.Stop();
         }
 
-        if(isactive && !ParticleSystem.activeSelf)
+        if(isactive && !particle.IsAlive())
         {
-            ParticleSystem.SetActive(true);
-        } else if(!isactive && ParticleSystem.activeSelf)
+            particle.Play();
+        } else if(!isactive && particle.IsAlive())
         {
-            ParticleSystem.SetActive(false);
+            particle.Clear();
+            particle.Stop();
         }
 
         /*
@@ -93,11 +96,7 @@ public class WirePod : MonoBehaviour {
             lineRenderer.SetPosition(0, gameObject.transform.position);
             lineRenderer.SetPosition(1, Player.transform.position + (Player.transform.position - gameObject.transform.position).normalized * 3f);
         }
-        */
-        
-        
-        
-        
+        */        
     }
 
     void OnCollisionEnter(Collision collision)

@@ -177,7 +177,7 @@ public class WireLauncher : MonoBehaviour {
             pod.GetComponent<WirePod>().IsTarget = false;
             pod.GetComponent<WirePod>().IsActive = false;
             //laser2.enabled = false;
-            pod.GetComponentInChildren<ParticleSystem>().Clear();
+            //pod.GetComponentInChildren<ParticleSystem>().Clear();
             pod.GetComponentInChildren<ParticleSystem>().Stop();
 
         }
