@@ -127,7 +127,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 124152}
   m_LocalRotation: {x: 0, y: -1, z: 0, w: -0.00000016292068}
-  m_LocalPosition: {x: 0.347, y: -0.12, z: 0.532}
+  m_LocalPosition: {x: 0.347, y: -0.12, z: 1}
   m_LocalScale: {x: 0.1, y: 0.1, z: 1}
   m_Children:
   - {fileID: 424330}
@@ -340,10 +340,10 @@ BoxCollider:
   m_GameObject: {fileID: 124152}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 12.683829, y: 6.049385, z: 0.53471303}
+  m_Center: {x: 0.21221805, y: -1.4806831, z: -0.03408695}
 --- !u!81 &8189808
 AudioListener:
   m_ObjectHideFlags: 1
@@ -367,7 +367,10 @@ MonoBehaviour:
     m_Bits: 0
   PrefabPod: {fileID: 100924, guid: 8205fd69e89001b4c94584d263b993a6, type: 2}
   Muzzle: {fileID: 179698}
+  trigger1: 0
+  trigger2: 0
   "\u9B3C\u755C\u30B9\u30A4\u30C3\u30C1": 1
+  trigger3: 1
   limit: 0
   Speed: 20
   JumpSpeed: 15
