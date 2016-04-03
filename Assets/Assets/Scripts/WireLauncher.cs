@@ -158,6 +158,7 @@ public class WireLauncher : MonoBehaviour {
         pod.GetComponentInChildren<ParticleSystem>().Clear();
         pod.GetComponentInChildren<ParticleSystem>().Stop();
         //GameObjectの青→と反対方向に射出
+        pod.GetComponent<Rigidbody>().velocity = PlayerRig.velocity;
         pod.GetComponent<Rigidbody>().AddForce(-transform.forward * ShotPower);
         //laser2.enabled = false;
 
