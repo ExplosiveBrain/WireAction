@@ -29,7 +29,7 @@ public class WireLauncher : MonoBehaviour {
     private Vector3 direction;
 
     //PlayerのJump力
-    public float JumpSpeed = 15f;
+    public float JumpSpeed = 17f;
 
     //PlayerがPodに接近できる距離
     public float Range = 2.0f;
