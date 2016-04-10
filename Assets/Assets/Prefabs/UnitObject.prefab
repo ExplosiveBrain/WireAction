@@ -11,7 +11,7 @@ GameObject:
   - 33: {fileID: 3346830}
   - 23: {fileID: 2301518}
   - 65: {fileID: 6554562}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26,7 +26,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 497636}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 423474}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Lamp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,7 +56,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 446822}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: UnitObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
